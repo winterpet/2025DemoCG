@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,34 +6,69 @@ using TMPro;
 
 public class GameManager_script : MonoBehaviour
 {
-
-    // using static to make sure the game has only one copy //
+    // Using static to make sure the game has only copy //
     public static GameManager_script instance;
 
-    // vARIABLE TO STore the health //
-    private int health;
+    // Variable to store the health //
+    public int health;
 
+
+    // Reference to the UI //
     public TextMeshProUGUI scoreText;
+
+    // Reference to the audio //
+    public AudioSource audioSource;
+
+    // Reference of the AudioClip//
+    public AudioClip[] healSoundArr;
+
+    // Reference for the BGM1 , 2//
+    public AudioClip BGM1;
+    public AudioClip BGM2;
+    public AudioClip healLong;
 
     // Start is called before the first frame update
     void Start()
     {
-        // store this class into the instancce variable //
+        // store this class into the instance variable //
         instance = this;
 
+        // Start health with 100 //
         health = 100;
 
-        scoreText.text = "Score: " + this.health;
+        // Display the current health onto the screen //
+        scoreText.text = "Health: " + this.health;
+    }
+
+    // Create a function to add health //
+    public void AddHealth(int _health, bool playSound = true)
+    {
+        this.health += _health;
+        print("this.health: " + this.health);
+        scoreText.text = "Health: " + this.health;
+
+        if (playSound)
+        {
+            audioSource.PlayOneShot(healSoundArr[Random.Range(0, healSoundArr.Length)]);
+        }
     }
 
 
-
-    public void AddHealth(int _health)
+    public void PlayBGM1()
     {
-        this.health += _health;
+        audioSource.clip = BGM1;
+        audioSource.Play();
+    }
 
-        print("this.health: " + this.health);
+    public void PlayBGM2()
+    {
+        audioSource.clip = BGM2;
+        audioSource.Play();
+    }
 
-        scoreText.text = "Score: " + this.health;
+        public void PlayhealLong()
+    {
+        audioSource.clip = healLong;
+        audioSource.Play();
     }
 }

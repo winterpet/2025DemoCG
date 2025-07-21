@@ -17,7 +17,7 @@ public class HealerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H)) 
         {
             // Call the gamemanager to add health //
-            GameManager_F.instance.AddHealth(10);
+            GameManager_script.instance.AddHealth(10);
         }
     }
 
@@ -32,7 +32,7 @@ public class HealerScript : MonoBehaviour
 
             // Now we can add the health of the player!! //
             // Call the gamemanager to add health //
-            GameManager_F.instance.AddHealth(10);
+            GameManager_script.instance.AddHealth(10);
         }
     }
 }
